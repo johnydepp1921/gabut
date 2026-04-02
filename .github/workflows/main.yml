@@ -1,0 +1,25 @@
+name: cmt
+
+on:
+  schedule:
+    - cron: '0 */5 * * *'
+  workflow_dispatch:
+jobs:
+  auto-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: update version
+        run: |
+          echo "$(date)" >> version.txt
+
+      - name: Commit & Push
+        run: |
+          git config user.name "heosjxhao"
+          git config user.email "pertiwijuli609@gmail.com"
+          git add .
+          git commit -m "update version"
+          git push
